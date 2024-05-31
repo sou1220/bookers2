@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bookers2</title>
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+        <%= csrf_meta_tags %>
+        <%= csp_meta_tag %>
+      <script src="https://kit.fontawesome.com/b2551a961c.js" crossorigin="anonymous"></script>
+        <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+        <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+  <body class = "d-flex flex-column vh-100">
+    <header>
+      <nav class = "navbar navbar" style = "background-color: #343a40">
+        <nav class = "navbar-expand-lg navbar-light"></nav>
+          <div class = container>
+            <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3">
+              <%= link_to "Bookers", root_path, class: "nav-link text-light" %>
+            </div>
+              <% if user_signed_in? %>
+                <div class = "d-flex justify-content-end">
+                  <%= link_to user_path(current_user.id), class: "nav-link text-light" do %>
+                  <i class="fa-solid fa-house"></i>Homes
+                  <% end %>
+                  <%= link_to users_path, class: "nav-link text-light" do %>
+                  <i class="fa-solid fa-users"></i>Users
+                  <% end %>
+                  <%= link_to books_path, class: "nav-link text-light" do %>
+                  <i class="fa-solid fa-book-open"></i>Books
+                  <% end %>
+                  <%= link_to destroy_user_session_path, method: :delete, class: "nav-link text-light" do %>
+                  <i class="fa-solid fa-right-from-bracket"></i>Log out
+                  <% end %>
+                </div>
+              </end>
+              <% else %>
+                <div class = "d-flex justify-content-end">
+                  <%= link_to root_path, class: "nav-link text-light" do %>
+                  <i class="fa-solid fa-house"></i>Home
+                  <% end %>
+                  <%= link_to about_path, class: "nav-link text-light" do %>
+                  <i class="fa-solid fa-link"></i>About
+                  <% end %>
+                  <!--新規登録用path registration= 登録-->
+                  <%= link_to new_user_registration_path, class: "nav-link text-light" do %>
+                  <i class="fa-solid fa-user-plus"></i>Sign up
+                  <% end %>
+                  <%= link_to new_user_session_path, class: "nav-link text-light" do %>
+                  <i class="fa-solid fa-right-to-bracket"></i>Log in
+                  <% end %>
+                </div>
+              </end>
+              <% end %>
+            </nav>
+          </div>
+        </header>
+      <main>
+     <%= yield %>
+    </main>
+  </body>
+</html>
